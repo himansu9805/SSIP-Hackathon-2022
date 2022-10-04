@@ -8,13 +8,14 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 
-function PhoneNumber() {
+function PhoneNumber(props) {
   return (
     <Box
       display={"flex"}
       justifyContent={"center"}
       alignItems={"center"}
       height="100%"
+      {...props}
     >
       <FormControl>
         <Typography variant="h4">
@@ -38,7 +39,9 @@ function PhoneNumber() {
           }}
         />
         <br />
-        <Button variant="contained">Continue</Button>
+        <Button variant="contained" onClick={props.continueHandler}>
+          Continue
+        </Button>
       </FormControl>
     </Box>
   );
