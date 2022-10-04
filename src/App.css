@@ -18,3 +18,59 @@
 .headerTitle {
   margin-left: 30px;
 }
+
+.MuiPickersCalendarHeader-dayLabel {
+  color: #999 !important;
+}
+.MuiPickersStaticWrapper-staticWrapperRoot {
+  background-color: #f7f7f7 !important;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.slotsContainer {
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+.slotsGrid {
+  margin-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 20px;
+  row-gap: 15px;
+}
+.slot {
+  padding: 10px 10px;
+  border: 1px solid grey;
+  color: #333;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .25s ease-in;
+}
+.slot:hover {
+  background-color: #ccc;
+}
+.slot-red {
+  background-color: #b70c0c;
+  border: none;
+  color: #fff;
+}
+.slot-red:hover {
+  background-color: rgb(118, 3, 3);
+  color: #fff;
+}
+.slot-green {
+  background-color: #387c3b;
+  border: none;
+  color: #fff;
+}
+.slot-green:hover {
+  background-color: #1a501c;
+  color: #fff;
+}
