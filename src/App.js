@@ -1,5 +1,5 @@
 import './App.css';
-import Portal from './pages/Portal';
+import Login from './pages/Login';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
@@ -7,21 +7,21 @@ function App() {
     typography: {
       fontFamily: ['Open Sans'].join(','),
     },
-    palette:{
-      primary : {
+    palette: {
+      primary: {
         main: "#000",
-        dark: "#fff"
+        dark: "#555"
       },
-      secondary : {
+      secondary: {
         main: "#555",
         dark: "#ccc"
       }
     }
   });
-  
+
   return (
     <ThemeProvider theme={theme}>
-      <Portal />
+      <Login />
     </ThemeProvider>
   );
 }
