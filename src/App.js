@@ -10,7 +10,7 @@ function App() {
     palette:{
       primary : {
         main: "#000",
-        dark: "#fff"
+        dark: "#555"
       },
       secondary : {
         main: "#555",

@@ -2,43 +2,66 @@ import { Typography } from '@mui/material';
 import React from 'react'
 import '../App.css';
 
-function Slots() {
+function Slots({ validSlots, announceSlot }) {
+  const [selected, setSelected] = React.useState(false)
+  console.log("[globalSelected] ", selected)
   return (
     <div className='slotsContainer'>
       <div style={{display: 'flex', width: '100%', flexDirection:'column'}}>
-        <Typography>
-          Slots
+        <Typography sx={{marginLeft: "15px", padding:0}}>
+          <h4>Pick a time for appointment</h4>
         </Typography>
         <div className='slotsGrid'>
           {
-            [10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((slot, i)=>(
-                <Slot text={"Slot"+i} />
+            validSlots.map((slot, i)=>{
+              return (
+                <Slot key={i} i={i}
+                  slot={slot}
+                  announceSlot={announceSlot}
+                  selected = {selected}
+                  selectHandler = {(b)=>{
+                    setSelected(b)
+                    console.log("[selectHandler globalSelect] ",selected)
+                  }}
+                />
               )
-            )
+            })
           }
-          <Slot text="Slot" type={1} />
-          <Slot text="Slot" type={2} />
         </div>
       </div>
     </div>
   )
 }
+export default Slots;
 
-function Slot(props){
-  const type = () => {
-    if(props.type === 1){
-      return "slot-red";
-    } else if(props.type === 2) {
-      return "slot-green";
-    } else {
-      return "";
-    }
+function Slot({i, slot, announceSlot, selected, selectHandler}) {
+  const [localSelected, setLocalSelected] = React.useState(selected)
+  let typeClass=""
+  if (slot.isAvailable === false) {
+    typeClass = "slot-red";
+  } else {
+    typeClass = "";
   }
+  console.log("[localSelected]", localSelected)
   return (
-    <div className={"slot "+type()}>
-      {props.text} 
+    <div className={"slot " + typeClass + (slot.isAvailable&&localSelected ? " slot-green" : "")}
+    onClick={() => {
+      if(slot.isAvailable){
+        /* if(selected){
+          selectHandler(false)
+          setLocalSelected(false)
+        } else {
+          selectHandler(true)
+          setLocalSelected(true)
+        } */
+        selectHandler(false)
+        setLocalSelected(!selected)
+        // setLocalSelected(!localSelected)
+        console.log("[localSelected] click", !localSelected)
+        announceSlot(i)
+      }
+    }}>
+      <Typography>{slot.time}</Typography>
     </div>
   )
 }
-
-export default Slots
