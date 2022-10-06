@@ -1,20 +1,12 @@
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-* {
-  font-family: 'Open Sans';
-}
-=======
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-@font-face {
-  font-family: "Samarkan";
-  src: url("./assets/fonts/samarkan.TTF");
-}
-
 * {
   font-family: "Open Sans";
 }
 
->>>>>>> d6913e9ec38cb5484fea859c4c457b79926baefa
+@font-face {
+  font-family: "Samarkan";
+  src: url("./assets/fonts/samarkan.TTF");
+}
 .headerContainer {
   display: flex;
   background-color: #ccc;
@@ -37,8 +29,6 @@
 
 
 
-<<<<<<< HEAD
-=======
 .loginPhoneInput {
   display: flex;
   flex-direction: row;
@@ -148,7 +138,6 @@
   margin-bottom: 2px;
 }
 
->>>>>>> d6913e9ec38cb5484fea859c4c457b79926baefa
 .MuiPickersCalendarHeader-dayLabel {
   color: #999 !important;
 }
@@ -248,8 +237,4 @@
   display: flex;
   align-items: center;
   color: #333;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d6913e9ec38cb5484fea859c4c457b79926baefa
