@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@font-face {
+  font-family: "Samarkan";
+  src: url("./assets/fonts/samarkan.TTF");
+}
+
+* {
+  font-family: "Open Sans";
+}
 
 .headerContainer {
   display: flex;
@@ -53,7 +61,179 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.hidden {
-  position: absolute;
-  left: -1000px;
+.otpContainerError {
+  width: 3rem !important;
+  height: 3rem;
+  margin: 0 0.25rem;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 4px;
+  background-color: rgb(255, 243, 243);
+  border: 1px solid rgba(237, 64, 64, 0.89);
+}
+
+.loginIndiaImage {
+  background-image: url(./assets/images/india.png);
+  position: fixed;
+  z-index: -1;
+  bottom: 0px;
+  left: 0px;
+  width: 675px;
+  height: 370px;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 675px 370px;
+  opacity: 0.3;
+}
+
+.loginAzadiImage {
+  background-image: url(./assets/images/azadi_ka_amrit_mahotsav.png);
+  position: fixed;
+  z-index: -1;
+  bottom: 15px;
+  right: 15px;
+  width: 675px;
+  height: 370px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 300px 163px;
+  opacity: 0.3;
+}
+
+.loginHeaderImage {
+  background-image: url(./assets/images/header_image.png);
+  position: fixed;
+  z-index: -1;
+  top: 15px;
+  left: 75px;
+  width: 406.2px;
+  height: 116.8px;
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: 406.2px 116.8px;
+  opacity: 1;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.slideTransition {
+  animation: 0.1s cubic-bezier(0.215, 0.61, 0.355, 1) 0s 1 slideInFromLeft;
+  padding: 30px;
+}
+
+.janSevaKendraText {
+  font-family: Samarkan;
+  font-size: 5rem;
+  margin-bottom: 2px;
+}
+
+.MuiPickersCalendarHeader-dayLabel {
+  color: #999 !important;
+}
+.MuiPickersStaticWrapper-staticWrapperRoot {
+  background-color: #f7f7f7 !important;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.slotsContainer,
+.genericContainer {
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 0px 10px 10px 10px;
+  margin: 0;
+}
+.slotsContainer {
+  margin-top: 30px;
+  padding: 0px 15px 15px 15px;
+}
+.slotsGrid {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 20px;
+  row-gap: 15px;
+}
+.slot {
+  padding: 10px 10px;
+  border: 1px solid grey;
+  color: #444;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.25s ease-in;
+}
+.slot:hover {
+  background-color: #ccc;
+}
+.slot-red {
+  background-color: #b70c0c;
+  border: 1px solid transparent;
+  color: #fff;
+  cursor: no-drop;
+}
+.slot-red:hover {
+  background-color: #b70c0c;
+}
+.slot-green {
+  background-color: #387c3b;
+  border: 1px solid transparent;
+  color: #fff;
+}
+.slot-green:hover {
+  background-color: #1a501c;
+  color: #fff;
+}
+.confirmContainer {
+  margin-top: -100px;
+  padding-bottom: 20px;
+}
+.confirmBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #333;
+}
+.confirmDate {
+  height: 120px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  border-radius: 5px;
+}
+.confirmFullDate {
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  padding-bottom: 8px;
+}
+.confirmDateDetail {
+  padding-left: 15px;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+}
+.confirmDateDetail span {
+  display: flex;
+  align-items: center;
+  color: #333;
 }
