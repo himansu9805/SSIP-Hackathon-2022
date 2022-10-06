@@ -7,7 +7,7 @@ function Header() {
       <div className='headerLogo'></div>
       <div className='headerTitle'>
         <Typography variant='h4'>
-          This is Title
+          Jan Seva Kendra
         </Typography>
       </div>
     </div>
