@@ -5,16 +5,23 @@ import CircularProgress from "@mui/material/CircularProgress";
 export function Loader() {
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
       height="100%"
     >
       <div className="slideTransition">
-        <CircularProgress size="2.5rem" />
-        <br />
-        <Typography variant="h5">LOADING</Typography>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          height="100%"
+        >
+          <CircularProgress size="2.5rem" />
+          <br />
+          <Typography variant="h5">LOADING</Typography>
+        </Box>
       </div>
     </Box>
   );

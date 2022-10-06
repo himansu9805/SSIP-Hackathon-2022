@@ -41,7 +41,7 @@ function PhoneNumber(props) {
           <Typography variant="h4">
             Welcome new user,
             <br />
-            fill in the details
+            please fill the details
           </Typography>
           <br />
           <TextField
