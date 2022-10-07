@@ -1,5 +1,3 @@
-import { Typography, Grid } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import PhoneNumber from "../components/PhoneNumber";
 import { auth } from "../firebase";
@@ -9,6 +7,9 @@ import NewUser from "../components/NewUser";
 import { createNewUser, isNewUser } from "../services/NewUser";
 import { Loader } from "../components/Loader";
 import { Navigate } from "react-router-dom";
+import { LinearProgress } from "@mui/material";
+import { Box } from "@mui/system";
+
 function Login() {
   const [otpSent, setotpSent] = useState(false);
   const [otpError, setotpError] = useState(false);
@@ -121,8 +122,11 @@ function Login() {
             />
           ) : (
             <div className="loginBox">
-              <h1>Redirect to Portal</h1>
-              <Navigate to="/portal" />
+              <h1>Redirecting to Portal</h1>
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
+              {<Navigate to="/portal" />}
             </div>
           )}
         </div>

@@ -1,0 +1,64 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 0 0;
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.button label,
+.button input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#time {
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.button input[type="radio"] {
+  opacity: 0;
+  z-index: 100;
+}
+
+.button input[type="radio"]:checked + label {
+  background: #387c3b;
+  border-radius: 4px;
+  transition: all 0.25s ease-in;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.inputEnabled {
+  cursor: pointer;
+}
+
+.inputDisabled {
+  cursor: not-allowed;
+}
+
+.inputEnabledLabel {
+  z-index: 90;
+  padding-top: 2.5px;
+  transition: all 0.25s ease-in;
+  border: 1px solid transparent;
+}
+
+.inputDisabledLabel {
+  background-color: #b70c0c;
+  border-radius: 4px;
+  transition: all 0.25s ease-in;
+  color: #fff;
+  padding-top: 2.5px;
+  cursor: no-drop;
+  border: 1px solid transparent;
+}
