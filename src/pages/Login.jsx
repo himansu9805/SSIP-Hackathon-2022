@@ -9,6 +9,9 @@ import { Loader } from "../components/Loader";
 import { Navigate } from "react-router-dom";
 import { LinearProgress } from "@mui/material";
 import { Box } from "@mui/system";
+import { UserContext } from '../services/UserContext';
+import { getDoc, doc } from '@firebase/firestore'
+import { db } from "../firebase";
 
 function Login() {
   const context = React.useContext(UserContext);
@@ -63,21 +66,22 @@ function Login() {
         setIsNew(await isNewUser(user.uid));
         
         
-        async function getData() {
+        async function getDataForContext() {
           try {
+            console.log("[getDataForContext] in uid", user.uid)
             const docSnap = await getDoc(doc(db, "Users", user.uid));
-            if (docSnap.docs.length === 1) {
-              context.data = {
-                aadhar_no: docSnap.data().aadhar_no,
-                name: docSnap.data().name,
-              };
-            } else {
-              
-            }
+            context.data = {
+              user_id: docSnap.id,
+              aadhar_no: docSnap.data().aadhar_no,
+              name: docSnap.data().name,
+            };
+            console.log(context.data)
           } catch (err) {
-            console.log("[Login] error ", err);
+            console.log("[getDataForContext] error ", err);
           }
         }
+
+        getDataForContext();
         setLoading(false);
       })
       .catch((error) => {

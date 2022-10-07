@@ -1,9 +1,11 @@
 import { Button, Menu, MenuItem, Typography } from '@mui/material';
 import React from 'react'
+import { UserContext } from '../services/UserContext';
 import { Link } from 'react-router-dom';
 import './header.css';
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const context = React.useContext(UserContext);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -11,6 +13,7 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
   return (
     <div className='headerContainer'>
       <div className="logoImage"></div>
@@ -29,7 +32,7 @@ function Header() {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
-            User
+            {context.data?.name}
           </Button>
           <Menu
             id="basic-menu"
