@@ -2,9 +2,11 @@ import { Typography } from "@mui/material";
 import React from "react";
 import "../App.css";
 import "./slots.css";
+import CircularProgress from '@mui/material/CircularProgress';
 
-function Slots({ validSlots, announceSlot }) {
+function Slots({ validSlots, announceSlot, availabilityArray, loading }) {
   const [selected, setSelected] = React.useState(false);
+  // console.log("[Slots] slotsList length", validSlots.length)
   // console.log("[globalSelected] ", selected)
   return (
     <div className="slotsContainer">
@@ -19,12 +21,14 @@ function Slots({ validSlots, announceSlot }) {
                 key={i}
                 i={i}
                 slot={slot}
+                availability={availabilityArray[i]}
                 announceSlot={announceSlot}
                 selected={selected}
                 selectHandler={(b) => {
                   setSelected(b);
                   // console.log("[selectHandler globalSelect] ",selected)
                 }}
+                loading = {loading}
               />
             );
           })}
@@ -35,7 +39,8 @@ function Slots({ validSlots, announceSlot }) {
 }
 export default Slots;
 
-function Slot({ i, slot, announceSlot, selected, selectHandler }) {
+function Slot({ i, slot, announceSlot, selected, selectHandler, availability, loading }) {
+  const avail = 10-availability;
   const [localSelected, setLocalSelected] = React.useState(selected);
   let typeClass = "";
   if (slot.isAvailable === false) {
@@ -43,28 +48,30 @@ function Slot({ i, slot, announceSlot, selected, selectHandler }) {
   } else {
     typeClass = "";
   }
-  console.log("[localSelected]", localSelected);
+  console.log(avail)
+  // console.log("[localSelected]", localSelected);
   return (
     <div className="button">
       <input
         key={i}
-        disabled={slot.isAvailable ? false : true}
-        className={slot.isAvailable ? "inputEnabled" : "2"}
+        disabled={avail>0 ? false : true}
+        className={avail>0 ? "inputEnabled" : "2"}
         type="radio"
         id="other"
         name="amount"
-        onClick={() => console.log(i)}
+        onClick={() => announceSlot(i) }
       />
       <label
         for="other"
         id="time"
         className={
-          slot.isAvailable ? "inputEnabledLabel" : "inputDisabledLabel"
+          avail>0 ? "inputEnabledLabel" : "inputDisabledLabel"
         }
+        
       >
         {slot.time}
         <br />
-        100
+        {loading || isNaN(avail) ? <CircularProgress size="1rem" sx={{color:"white"}} /> : <span style={{ fontSize: "0.8rem" }}>{avail}</span>}
       </label>
       {/* <div
         className={
@@ -85,7 +92,7 @@ function Slot({ i, slot, announceSlot, selected, selectHandler }) {
             setLocalSelected(!selected);
             // setLocalSelected(!localSelected)
             // console.log("[localSelected] click", !localSelected)
-            announceSlot(i);
+            
           }
         }}
       ></div> */}
