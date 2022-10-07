@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './pages/Login';
 import Portal from './pages/Portal';
+import Admin from './pages/Admin';
 import History from './pages/History';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/portal" element={<Portal />} />
           <Route path="/history" element={<History />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<Login />} />
         </Routes>
       </ThemeProvider>
