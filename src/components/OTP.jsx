@@ -69,21 +69,16 @@ function OTP(props) {
   };
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      height="100%"
-    >
+    <div className="loginBox">
       <div className="slideTransition">
         <FormControl>
-          <Typography variant="h4">
+          <div className="loginSubText">
             Enter the OTP sent on
             <br />
             your mobile number
-          </Typography>
+          </div>
           <br />
-          <Box>
+          <div>
             <input
               name="field-1"
               maxLength={1}
@@ -144,7 +139,7 @@ function OTP(props) {
               type="text"
               onChange={(e) => setOTP6(e.target.value)}
             ></input>
-          </Box>
+          </div>
           <br />
           {error ||
             (props.otpError && (
@@ -200,7 +195,7 @@ function OTP(props) {
           </Button>
         </FormControl>
       </div>
-    </Box>
+    </div>
   );
 }
 

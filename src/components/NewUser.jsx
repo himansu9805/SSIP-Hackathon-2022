@@ -29,20 +29,14 @@ function PhoneNumber(props) {
   };
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      height="100%"
-      {...props}
-    >
+    <div className="loginBox">
       <div className="slideTransition">
         <FormControl>
-          <Typography variant="h4">
+          <h4 className="loginSubText">
             Welcome new user,
             <br />
             please fill the details
-          </Typography>
+          </h4>
           <br />
           <TextField
             required
@@ -146,7 +140,7 @@ function PhoneNumber(props) {
           </Button>
         </FormControl>
       </div>
-    </Box>
+    </div>
   );
 }
 

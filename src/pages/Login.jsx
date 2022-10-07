@@ -75,26 +75,25 @@ function Login() {
   return (
     <div className="loginContainer">
       <div className="loginIndiaImage"></div>
-      <Grid container margin={0}>
-        <Grid xs={12} md={7} height="100%">
-          <div className="loginHeaderImage"></div>
-          <Box
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            height="100%"
-          >
-            <Box margin={10}>
-              <h2 className="janSevaKendraText">JAN SEVA KENDRA</h2>
-              <br />
-              <Typography variant="h4">
-                District Collectorate is the outcome of the strategic union of
-                technology and positive governance.
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid xs={12} md={5} width="100%" height="100%">
+      <div className="loginGridRoot">
+        <div className="loginGridChild">
+          <div className="loginBox">
+            <div className="loginBoxImage">
+              <div className="loginHeaderImage"></div>
+            </div>
+            <div className="loginBox">
+              <div className="loginBoxText">
+                <h2 className="janSevaKendraText">JAN SEVA KENDRA</h2>
+                <br />
+                <h4 className="loginSubText">
+                  District Collectorate is the outcome of the strategic union of
+                  technology and positive governance.
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="loginGridChild">
           <div className="loginAzadiImage"></div>
           {user === undefined ? (
             <>
@@ -121,10 +120,12 @@ function Login() {
               createNewUser={(uid, userData) => newUser(uid, userData)}
             />
           ) : (
-            <h1>Redirect to Portal</h1>
+            <div className="loginBox">
+              <h1>Redirect to Portal</h1>
+            </div>
           )}
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </div>
   );
 }

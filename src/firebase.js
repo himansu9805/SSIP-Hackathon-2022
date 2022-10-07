@@ -4,13 +4,12 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNvQoo33yo0nFGIwifr-GPCyzb0Vn-Rgk",
-  authDomain: "the-flutter-app-a6b43.firebaseapp.com",
-  projectId: "the-flutter-app-a6b43",
-  storageBucket: "the-flutter-app-a6b43.appspot.com",
-  messagingSenderId: "221988841875",
-  appId: "1:221988841875:web:48f58a471af2e90f9ee066",
-  measurementId: "G-SBC1F75DCX"
+  apiKey: "AIzaSyCMUxCd5URq4hHe-IEn6u8KWGurew4_q2Y",
+  authDomain: "ssip-hackathon-2022-66e4b.firebaseapp.com",
+  projectId: "ssip-hackathon-2022-66e4b",
+  storageBucket: "ssip-hackathon-2022-66e4b.appspot.com",
+  messagingSenderId: "965283144515",
+  appId: "1:965283144515:web:0f35417770583180a905f6"
 };
 
 const app = initializeApp(firebaseConfig);

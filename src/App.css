@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
 * {
   font-family: "Open Sans";
 }
@@ -25,9 +26,6 @@
 .headerTitle {
   margin-left: 30px;
 }
-
-
-
 
 .loginPhoneInput {
   display: flex;
@@ -104,10 +102,9 @@
 
 .loginHeaderImage {
   background-image: url(./assets/images/header_image.png);
-  position: fixed;
+  position: relative;
   z-index: -1;
-  top: 15px;
-  left: 75px;
+
   width: 406.2px;
   height: 116.8px;
   background-repeat: no-repeat;
@@ -147,7 +144,8 @@
   border: 1px solid #ddd;
 }
 
-.slotsContainer, .genericContainer {
+.slotsContainer,
+.genericContainer {
   background-color: #f7f7f7;
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -237,4 +235,192 @@
   display: flex;
   align-items: center;
   color: #333;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loginBoxLodaer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 250px;
+}
+
+.loginBoxText {
+  margin-top: -150px;
+  margin-right: 100px;
+}
+
+.loginBoxImage {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: flex-start;
+  height: fit-content;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.loginGridRoot {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.loginGridChild:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 65%;
+}
+
+.loginGridChildR:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 35%;
+}
+
+.loginSubText {
+  font-size: 2.25rem;
+  font-family: "Open Sans";
+  font-weight: normal;
+}
+
+@media screen and (max-width: 480px) {
+  .loginBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+  }
+
+  .loginBoxText {
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+
+  .loginBoxImage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin: 10px;
+  }
+
+  .loginIndiaImage {
+    background-image: url(./assets/images/india.png);
+    position: fixed;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    opacity: 0.3;
+  }
+
+  .loginAzadiImage {
+    background-image: url(./assets/images/azadi_ka_amrit_mahotsav.png);
+    position: fixed;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-position: top right;
+    scale: 100%;
+    opacity: 0.3;
+  }
+
+  .loginHeaderImage {
+    position: sticky;
+    background-image: url(./assets/images/header_image.png);
+    height: 87.6px;
+    width: 304.65px;
+    background-size: 304.65px 87.6px;
+    opacity: 1;
+    margin-top: 10px;
+    left: 0px;
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+
+  .loginGridRoot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 0px;
+  }
+
+  .loginGridChild:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .loginGridChild:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .janSevaKendraText {
+    font-size: 3rem;
+  }
+
+  .loginSubText {
+    font-size: 1.5rem;
+  }
+
+  .otpContainer {
+    width: 2.5rem !important;
+    height: 2.5rem;
+    margin: 0 0.1rem;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .otpContainerError {
+    width: 2.5rem !important;
+    height: 2.5rem;
+    margin: 0 0.1rem;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 4px;
+    background-color: rgb(255, 243, 243);
+    border: 1px solid rgba(237, 64, 64, 0.89);
+  }
+
+  .slideTransition {
+    padding: 0px;
+  }
 }

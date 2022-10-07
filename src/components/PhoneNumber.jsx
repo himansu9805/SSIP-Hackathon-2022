@@ -26,20 +26,14 @@ function PhoneNumber(props) {
   };
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      height="100%"
-      {...props}
-    >
-      <div className="phoneNumberTransition">
+    <div className="loginBox">
+      <div className="slideTransition">
         <FormControl>
-          <Typography variant="h4">
+          <h4 className="loginSubText">
             Enter your mobile
             <br />
             number to continue
-          </Typography>
+          </h4>
           <br />
           <TextField
             error={error}
@@ -93,7 +87,7 @@ function PhoneNumber(props) {
           </Button>
         </FormControl>
       </div>
-    </Box>
+    </div>
   );
 }
 
