@@ -8,7 +8,7 @@ import OTP from "../components/OTP";
 import NewUser from "../components/NewUser";
 import { createNewUser, isNewUser } from "../services/NewUser";
 import { Loader } from "../components/Loader";
-
+import { Navigate } from 'react-router-dom';
 function Login() {
   const [otpSent, setotpSent] = useState(false);
   const [otpError, setotpError] = useState(false);
@@ -121,7 +121,10 @@ function Login() {
               createNewUser={(uid, userData) => newUser(uid, userData)}
             />
           ) : (
+            <>
             <h1>Redirect to Portal</h1>
+            <Navigate to="/portal" />
+            </>
           )}
         </Grid>
       </Grid>
