@@ -1,0 +1,29 @@
+.confirmationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.confirmationText1 {
+  font-size: 1.5rem;
+}
+
+.confirmationID {
+  font-size: 2.5rem;
+  color: rgb(56, 157, 56);
+}
+
+.confirmationNote {
+  color: rgb(177, 40, 40);
+}
+
+.confirmationRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
