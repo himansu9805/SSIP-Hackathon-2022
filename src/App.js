@@ -1,6 +1,9 @@
 import './App.css';
 import Login from './pages/Login';
+import Portal from './pages/Portal';
+import History from './pages/History';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 function App() {
   const theme = createTheme({
@@ -20,9 +23,15 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <Login />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/portal" element={<Portal />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

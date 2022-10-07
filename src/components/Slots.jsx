@@ -4,7 +4,7 @@ import '../App.css';
 
 function Slots({ validSlots, announceSlot }) {
   const [selected, setSelected] = React.useState(false)
-  console.log("[globalSelected] ", selected)
+  // console.log("[globalSelected] ", selected)
   return (
     <div className='slotsContainer'>
       <div style={{display: 'flex', width: '100%', flexDirection:'column'}}>
@@ -21,7 +21,7 @@ function Slots({ validSlots, announceSlot }) {
                   selected = {selected}
                   selectHandler = {(b)=>{
                     setSelected(b)
-                    console.log("[selectHandler globalSelect] ",selected)
+                    // console.log("[selectHandler globalSelect] ",selected)
                   }}
                 />
               )
@@ -57,7 +57,7 @@ function Slot({i, slot, announceSlot, selected, selectHandler}) {
         selectHandler(false)
         setLocalSelected(!selected)
         // setLocalSelected(!localSelected)
-        console.log("[localSelected] click", !localSelected)
+        // console.log("[localSelected] click", !localSelected)
         announceSlot(i)
       }
     }}>
