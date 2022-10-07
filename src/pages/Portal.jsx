@@ -6,17 +6,35 @@ import Header from '../components/Header'
 import Slots from '../components/Slots';
 import moment from 'moment'
 import AboutAppointment from '../components/AboutAppointment';
+import { UserContext } from '../services/UserContext';
+import { collection, getDocs, doc, addDoc } from '@firebase/firestore'
+import { db } from "../firebase";
+import CircularProgress from '@mui/material/CircularProgress';
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 function Portal() {
-  const [service, setService] = React.useState('');
+  const context = React.useContext(UserContext);
+  const [service, setService] = React.useState(1);
   const [date, setDate] = React.useState(moment(new Date()));
+  const [loading, setLoading] = React.useState(false)
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [snackbarText, setSnackbarText] = React.useState([]);
+  const [servicesList, setServicesList]  = React.useState([])
+  const showSnackbar = (msg) => {
+    setSnackbarText(msg);
+    setOpenSnackbar(true);
+  };
+  const handleSnackbarClose = () => {
+    setOpenSnackbar(false);
+  };
   const validSlots = [
     {time:'09 : 00 AM', isAvailable: true},
     {time:'10 : 00 AM', isAvailable: true},
     {time:'11 : 00 AM', isAvailable: true},
     {time:'12 : 00 PM', isAvailable: true},
     {time:'01 : 00 PM', isAvailable: true},
-    {time:'02 : 00 PM', isAvailable: false},
-    {time:'03 : 00 PM', isAvailable: false},
+    {time:'02 : 00 PM', isAvailable: true},
+    {time:'03 : 00 PM', isAvailable: true},
     {time:'04 : 00 PM', isAvailable: true},
     {time:'05 : 00 PM', isAvailable: true},
     {time:'06 : 00 PM', isAvailable: true}
@@ -25,16 +43,41 @@ function Portal() {
   const handleChange = (event) => {
     setService(event.target.value);
   };
-  const bookAppointment = () => {
+  const bookAppointment = async() => {
     const dateObj = moment(date)
-    const data = {
-      user: "",
-      service : service,
-      date: ""+dateObj.date()+"/"+(dateObj.month()+1)+"/"+dateObj.year(),
-      slot: "slotId"
+    setLoading(true)
+    try {
+      /* await addDoc(collection(db, "Appointments"), {
+        date: "" + dateObj.date() + "/" + (dateObj.month() + 1) + "/" + dateObj.year(),
+        user_id: doc(db, "Users", "G3vDWjKgw8P4YlQBLNvOkdSB3H42"),
+        slot_id: doc(db, "Slots", "Slot_01"),
+        service_id: doc(db, "Services", "SID_00"),
+      }) */
+      showSnackbar(["success","Your appointment has been booked successfully!"])
+      console.log("[BookAppointment] success")
+    } catch (err) {
+      showSnackbar(["error","Something went wrong while booking your appointment."])
+      console.log("[BookAppointment] error", err)
     }
-    console.log(data)
+    setLoading(false)
   }
+
+  React.useEffect(()=>{
+
+    async function getServices(){
+      const docsSnap = await getDocs(collection(db, "Services"));
+      const arr = []
+      docsSnap.forEach(doc => {
+        arr.push({id:doc.id, ...doc.data()})
+        console.log(doc.data());
+      })
+      setServicesList(arr)
+    }
+    
+    setServicesList([])
+    // getServices()
+  }, [])
+console.log(servicesList)
   return (
     <Box>
       <Header />
@@ -51,18 +94,12 @@ function Portal() {
                   onChange={handleChange}
                   native
                   variant="outlined">
-                  <option aria-label="None" value="" />
-                  <optgroup label="Card Issuance">
-                    <option value={1}>Aadhar Card</option>
-                    <option value={2}>Ration Card</option>
-                  </optgroup>
-                  <optgroup label="Certificates">
-                    <option value={3}>Category Certificate</option>
-                    <option value={4}>Option 2</option>
-                  </optgroup>
-                  <optgroup label="Updation">
-                    <option value={5}>Option 1</option>
-                    <option value={6}>Option 2</option>
+                  <optgroup label="Issuance">
+                    {
+                      servicesList.map((service, i)=>(
+                        <option value={i}>{service.name}</option>
+                      ))
+                    }
                   </optgroup>
                 </Select>
               </FormControl>
@@ -79,12 +116,7 @@ function Portal() {
             <Slots validSlots={validSlots} announceSlot={(i)=>{
               setSlot(i)
             }} />
-            <div style={{marginTop:"30px"}} className='genericContainer'>
-              <Typography sx={{ marginLeft: "15px", padding: 0 }}>
-                <h4>About this service</h4>
-              </Typography>
-              <AboutAppointment service={service} slot={validSlots[slot]} />
-            </div>
+            { servicesList.length>1&&<AboutAppointment service={servicesList[service]} />}
           </Grid>
           <Grid item xs={12} md={3}>
             <div style={{marginTop:"30px"}} className='genericContainer confirmContainer'>
@@ -117,12 +149,39 @@ function Portal() {
                   </span>
                 </div>
                 <br/>
-                <Button variant="contained" onClick={bookAppointment}>Book Appointment</Button>
+                <Button
+                  variant="contained"
+                  onClick={bookAppointment}
+                  disabled={loading}
+                  style={{transition:"all 0.5s ease-in-out"}}
+                >
+                  {!loading?
+                  <>Book Appointment</>
+                    : <>
+                      <span style={{opacity:0}}>PPPP</span>
+                      <CircularProgress size="1rem" color="secondary" />
+                      <span style={{opacity:0}}>PPPP</span>
+                      </>
+                  }
+                </Button>
               </div>
             </div>
           </Grid>
         </Grid>
       </Box>
+      <Snackbar
+        autoHideDuration={4000}
+        open={openSnackbar}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarText[0]}
+          sx={{ width: "100%" }}
+        >
+          {snackbarText[1]}
+        </Alert>
+      </Snackbar>
     </Box>
   )
 }
