@@ -9,7 +9,11 @@ import NewUser from "../components/NewUser";
 import { createNewUser, isNewUser } from "../services/NewUser";
 import { Loader } from "../components/Loader";
 import { Navigate } from "react-router-dom";
+import {  getDoc, doc } from '@firebase/firestore'
+import { db } from "../firebase";
+import { UserContext } from '../services/UserContext';
 function Login() {
+  const context = React.useContext(UserContext);
   const [otpSent, setotpSent] = useState(false);
   const [otpError, setotpError] = useState(false);
   const [user, setUser] = useState(undefined);
@@ -57,7 +61,25 @@ function Login() {
         console.log(user);
         setotpError(false);
         setUser(user);
+        console.log(user)
         setIsNew(await isNewUser(user.uid));
+        
+        
+        async function getData() {
+          try {
+            const docSnap = await getDoc(doc(db, "Users", user.uid));
+            if (docSnap.docs.length === 1) {
+              context.data = {
+                aadhar_no: docSnap.data().aadhar_no,
+                name: docSnap.data().name,
+              };
+            } else {
+              
+            }
+          } catch (err) {
+            console.log("[Login] error ", err);
+          }
+        }
         setLoading(false);
       })
       .catch((error) => {

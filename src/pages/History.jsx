@@ -17,35 +17,33 @@ import Header from '../components/Header'
 
 function History() {
 
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  function createData(name, calories) {
+    return { name, calories };
   }
 
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Aadhar Card Updation', 159),
+    createData('Birth Certificate Issuance', 237),
+    createData('Ration Card Updation', 262),
+    createData('Voter ID Card Issuance', 305),
+    createData('Driver License Updation', 356),
   ];
   return (
     <Box>
       <Header />
-      <Box p={5}>
-        <div style={{ marginTop: "10px" }} className='genericContainer confirmContainer'>
+      <Box p={5} style={{display:"flex", justifyContent:"center"}}>
+        <div style={{ marginTop: "10px", width: "80%", display:"flex", flexDirection:"column", justifyContent:"center"}} className='genericContainer confirmContainer'>
           <Typography sx={{ marginLeft: "15px", padding: 0 }}>
             <h4>Appointment History</h4>
           </Typography>
-          <div style={{marginTop:"0px"}}>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <div style={{ display: "flex", justifyContent:"center", alignItems:"center", marginTop:"0px"}}>
+            <TableContainer sx={{maxWidth: 650}} component={Paper}>
+              <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={{fontWeight:"bold"}}>Dessert (100g serving)</TableCell>
-                    <TableCell sx={{fontWeight:"bold"}} align="right">Calories</TableCell>
-                    <TableCell sx={{fontWeight:"bold"}} align="right">Fat&nbsp;(g)</TableCell>
-                    <TableCell sx={{fontWeight:"bold"}} align="right">Carbs&nbsp;(g)</TableCell>
-                    <TableCell sx={{fontWeight:"bold"}} align="right">Protein&nbsp;(g)</TableCell>
+                    <TableCell sx={{fontWeight:"bold"}}>Service</TableCell>
+                    <TableCell sx={{fontWeight:"bold"}} align="right">Date Time</TableCell>
+                    <TableCell sx={{fontWeight:"bold"}} align="right">Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -58,9 +56,7 @@ function History() {
                         {row.name}
                       </TableCell>
                       <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right" style={{color:"green"}}>Done</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -42,7 +42,7 @@ function Slot({i, slot, announceSlot, selected, selectHandler}) {
   } else {
     typeClass = "";
   }
-  console.log("[localSelected]", localSelected)
+  // console.log("[localSelected]", localSelected)
   return (
     <div className={"slot " + typeClass + (slot.isAvailable&&localSelected ? " slot-green" : "")}
     onClick={() => {
@@ -54,7 +54,7 @@ function Slot({i, slot, announceSlot, selected, selectHandler}) {
           selectHandler(true)
           setLocalSelected(true)
         } */
-        selectHandler(false)
+        // selectHandler(false)
         setLocalSelected(!selected)
         // setLocalSelected(!localSelected)
         // console.log("[localSelected] click", !localSelected)
