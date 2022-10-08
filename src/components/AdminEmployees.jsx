@@ -6,29 +6,46 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { getDocs, getDoc, collection } from "firebase/firestore";
+import { getDocs, getDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Box } from "@mui/system";
-import { Button, IconButton } from "@mui/material";
+import { Alert, Button, IconButton, Snackbar } from "@mui/material";
 import {useState} from 'react'
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grow from "@mui/material/Grow";
 function AdminEmployees() {
   const [employees, setEmployees] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [open, setOpen] = useState(false);
   const [openItemEDialog, setOpenItemEDialog] = useState([false, {}]);
   const [openItemDDialog, setOpenItemDDialog] = useState([false, {}]);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [snackbarText, setSnackbarText] = React.useState([]);
+  const [servicesList, setServicesList] = React.useState([]); 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  const showSnackbar = (msg) => {
+    setSnackbarText(msg);
+    setOpenSnackbar(true);
+  };
+  const handleSnackbarClose = () => {
+    setOpenSnackbar(false);
+  };
   React.useEffect(() => {
     async function getEmployees() {
       const docsSnap = await getDocs(collection(db, "Employees"));
       docsSnap.forEach(async (doc) => {
         console.log(doc.data());
-        setEmployees((oldArray) => [...oldArray, doc.data()]);
+        setEmployees((oldArray) => [...oldArray, {id: doc.id, ...doc.data()}]);
       });
     }
     setLoading(true);
@@ -42,6 +59,24 @@ function AdminEmployees() {
   const handleCloseItemDDialog = () => {
     setOpenItemDDialog([false, {}]);
   };
+
+  const employeeDelete = (employee) => {
+    console.log(employee)
+    async function deleteEmployee(){
+      await deleteDoc(doc(db, "Employees", employee.id));
+    }
+    try {
+      deleteEmployee()
+      let tempEmp = employees
+      const deleteIndex = tempEmp.indexOf((employees.find(emp => emp.id === employee.id)))
+      tempEmp.splice(deleteIndex, 1)
+      setEmployees(tempEmp)
+      console.log("[employee]", employees)
+      showSnackbar(["success", "Employee deletion successful"])  
+    } catch (error) {
+      showSnackbar(["success", "Employee deletion unsuccessful "+error])
+    }
+  }
   return (
     <>
     <div>
@@ -75,86 +110,29 @@ function AdminEmployees() {
                   <TableCell>{row.phone_no}</TableCell>
                   <TableCell>{row.aadhar_no}</TableCell>
                   <TableCell>
-                    <IconButton aria-label="delete" onClick={handleOpenItemDDialog}><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24" /></g><g><path d="M14,8c0-2.21-1.79-4-4-4S6,5.79,6,8s1.79,4,4,4S14,10.21,14,8z M17,10v2h6v-2H17z M2,18v2h16v-2c0-2.66-5.33-4-8-4 S2,15.34,2,18z" /></g></svg></IconButton></TableCell>
+                    <IconButton aria-label="delete" onClick={()=>employeeDelete(row)}><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24" /></g><g><path d="M14,8c0-2.21-1.79-4-4-4S6,5.79,6,8s1.79,4,4,4S14,10.21,14,8z M17,10v2h6v-2H17z M2,18v2h16v-2c0-2.66-5.33-4-8-4 S2,15.34,2,18z" /></g></svg></IconButton></TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
     </div>
-    
-     {/*  <ConfirmationDialog
-        feedback={showSnackbar}
-        open={openItemDDialog[0]}
-        onClose={handleCloseItemDDialog}
-        item={__________}
-      /> */}
-    
-    
+
+      <Snackbar
+        autoHideDuration={4000}
+        open={openSnackbar}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarText[0]}
+          sx={{ width: "100%" }}
+        >
+          {snackbarText[1]}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
 
 export default AdminEmployees;
-
-/* export const ConfirmationDialog = ({ open, onClose, item, feedback }) => {
-  const context = useContext(SweeatsContext);
-  const [loading, setLoading] = useState(false);
-  const GetItemReference = async (name) => {
-    const docSnap = await getDocs(collection(db, "sweets"));
-    const items = docSnap.docs.map((doc) => {
-      return { ref: doc.id, name: doc.data().Name };
-    });
-    return items.filter((i) => i.name === name)[0].ref;
-  };
-  const deleteItem = async () => {
-    setLoading(true);
-    try {
-      const itemRef = await GetItemReference(item.name);
-      await updateDoc(doc(db, "stores", context.data.store_fid), {
-        items: arrayRemove({
-          price: item.price,
-          rating: item.rating,
-          available: item.available,
-          ref: doc(db, "sweets", itemRef),
-        }),
-      });
-      feedback(["success", "Item deleted successfully."]);
-      setTimeout(() => {
-        setLoading(false);
-        onClose();
-      }, 1000);
-    } catch (error) {
-      console.log("[Items] updateItem ", error);
-      feedback(["error", "Item deletion failed."]);
-      setTimeout(() => {
-        setLoading(false);
-        onClose();
-      }, 1000);
-    }
-  };
-  return (
-    <Dialog fullWidth open={open} onClose={onClose}>
-      <Grow in={open}>
-        <Box>
-          <DialogTitle className="font-bold">Delete Item</DialogTitle>
-          <DialogContent>
-            Delete <b>{item.name}</b> from items menu? This cannot be undone.
-          </DialogContent>
-          <DialogActions className="flex items-center mt-10 space-x-2">
-            <Button onClick={onClose}>Cancel</Button>
-            <UILDButton
-              type="submit"
-              loading={loading}
-              text="Yes"
-              color="error"
-              variant="contained"
-              onClick={deleteItem}
-            />
-          </DialogActions>
-        </Box>
-      </Grow>
-    </Dialog>
-  );
-};
- */
