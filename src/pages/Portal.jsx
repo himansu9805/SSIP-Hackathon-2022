@@ -146,10 +146,11 @@ function Portal() {
   };
 
   React.useEffect(() => {
-    /* if(context.data === undefined){
-      navigate('/');
-    } */
-    console.log(context)
+    console.log(context.data);
+    if (context.data === undefined) {
+      navigate("/");
+    }
+    console.log(context);
     setPageLoading(true);
     async function getServices() {
       const docsSnap = await getDocs(collection(db, "Services"));
