@@ -59,29 +59,11 @@ function Header() {
               >
                 Appointment History
               </Link>
-<<<<<<< HEAD
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate("/");
-              }}
-            >
-              Logout
-            </MenuItem>
-||||||| 9bbd1ec
-            </MenuItem>}
-            <MenuItem onClick={()=>{
-              handleClose()
-              navigate('/')
-            }}>Logout</MenuItem>
-=======
             </MenuItem>
             <MenuItem onClick={()=>{
               handleClose()
               navigate('/')
             }}>Logout</MenuItem>
->>>>>>> 43546a10ccd63c07455df44aa4d6d24a70129b28
           </Menu>
         </div>
       </div>
