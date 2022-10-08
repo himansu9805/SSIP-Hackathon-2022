@@ -288,7 +288,7 @@ function Portal() {
                     <h4>Select a date to make an appointment</h4>
                   </Typography>
                 </div>
-              ) : slotsLoading ? (
+              ) : date.day()===0 ? (
                 <div className="slotsContainer">
                   <div
                     style={{
@@ -297,10 +297,9 @@ function Portal() {
                       flexDirection: "column",
                     }}
                   >
-                    <Typography sx={{ marginLeft: "15px", padding: 0 }}>
-                      <h4>Pick a time for appointment</h4>
+                    <Typography sx={{ textAlign:"center", padding: 0 }}>
+                      <h4>Oops! This is a holiday!</h4>
                     </Typography>
-                    <CircularProgress />
                   </div>
                 </div>
               ) : (
@@ -392,7 +391,7 @@ function Portal() {
                     <Button
                       variant="contained"
                       onClick={bookAppointment}
-                      disabled={loading}
+                      disabled={loading || date.day()===0}
                       style={{ transition: "all 0.5s ease-in-out" }}
                     >
                       {!loading ? (
