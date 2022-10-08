@@ -14,9 +14,9 @@ export function BookingConfirmation() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (context.data === undefined) {
-      navigate('/');
-    }
+    // if (context.data === undefined) {
+    //   navigate('/');
+    // }
   }, [])
   return (
     <div className="confirmationParent">

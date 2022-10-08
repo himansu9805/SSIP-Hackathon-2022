@@ -18,9 +18,9 @@ function History() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (context.data === undefined) {
-      navigate("/");
-    }
+    // if (context.data === undefined) {
+    //   navigate("/");
+    // }
   }, []);
   function createData(name, calories) {
     return { name, calories };

@@ -147,9 +147,9 @@ function Portal() {
 
   React.useEffect(() => {
     console.log(context.data);
-    if (context.data === undefined) {
+    /* if (context.data === undefined) {
       navigate("/");
-    }
+    } */
     console.log(context);
     setPageLoading(true);
     async function getServices() {
