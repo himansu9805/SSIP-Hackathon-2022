@@ -52,18 +52,22 @@ function Header() {
               "aria-labelledby": "basic-button",
             }}
           >
-            {context.data.name==="admin"&&<MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose}>
               <Link
                 to="/history"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 Appointment History
               </Link>
-            </MenuItem>}
-            <MenuItem onClick={()=>{
-              handleClose()
-              navigate('/')
-            }}>Logout</MenuItem>
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate("/");
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </div>
       </div>
