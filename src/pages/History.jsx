@@ -1,22 +1,26 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
+import { useEffect, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Header from '../components/Header'
-
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../services/UserContext";
 
 function History() {
+  const context = useContext(UserContext);
+  const navigate = useNavigate();
 
+  useEffect(()=>{
+    if (context.data === undefined) {
+      navigate('/');
+    }
+  }, [])
   function createData(name, calories) {
     return { name, calories };
   }

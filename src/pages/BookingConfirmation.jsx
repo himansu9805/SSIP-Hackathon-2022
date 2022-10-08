@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react'
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import Header from "../components/Header";
 import "../styles/BookingConfirmation.css";
@@ -5,10 +6,18 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 import { Typography, Button } from "@mui/material";
 import { Link, useSearchParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../services/UserContext";
 export function BookingConfirmation() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const context = useContext(UserContext);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (context.data === undefined) {
+      navigate('/');
+    }
+  }, [])
   return (
     <div className="confirmationParent">
       <Header />

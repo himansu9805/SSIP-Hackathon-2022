@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
   TextField,
@@ -8,8 +8,10 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../services/UserContext";
 
 function AdminLogin() {
+  const context = React.useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -24,7 +26,9 @@ function AdminLogin() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+        context.data = {
+          name:"Admin"
+        }
         // ...
       })
       .catch((error) => {

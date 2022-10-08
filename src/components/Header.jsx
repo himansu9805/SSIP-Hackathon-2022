@@ -3,6 +3,8 @@ import React from "react";
 import { UserContext } from "../services/UserContext";
 import { Link } from "react-router-dom";
 import "./header.css";
+import { useNavigate } from "react-router-dom";
+
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const context = React.useContext(UserContext);
@@ -13,6 +15,7 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const navigate = useNavigate();
 
   return (
     <div className="headerContainer">
@@ -49,15 +52,18 @@ function Header() {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>
+            {context.data.name==="admin"&&<MenuItem onClick={handleClose}>
               <Link
                 to="/history"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 Appointment History
               </Link>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </MenuItem>}
+            <MenuItem onClick={()=>{
+              handleClose()
+              navigate('/')
+            }}>Logout</MenuItem>
           </Menu>
         </div>
       </div>
