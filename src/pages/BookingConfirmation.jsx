@@ -4,9 +4,11 @@ import "../styles/BookingConfirmation.css";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import { Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export function BookingConfirmation() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <div className="confirmationParent">
       <Header />
@@ -16,7 +18,7 @@ export function BookingConfirmation() {
           className="genericContainer confirmContainer"
         >
           <h1 className="confirmationText1">Your Booking ID is</h1>
-          <h1 className="confirmationID">OCT_07_1</h1>
+          <h1 className="confirmationID">{searchParams.get("id")}</h1>
           <span className="confirmationNote">NOTE:</span>
           <br />
           <span className="confirmationNote">

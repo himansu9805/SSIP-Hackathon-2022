@@ -19,6 +19,7 @@ import { db } from "../firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 function Portal() {
   const context = React.useContext(UserContext);
   const [service, setService] = React.useState(1);
@@ -34,6 +35,7 @@ function Portal() {
   const [slot, setSlot] = React.useState(0);
   const [slotDataLoad, setSlotDataLoad] = React.useState(false);
   const btnRef = React.useRef();
+  const navigate = useNavigate();
 
   const clickBtn = () => {
     btnRef.current.click();
@@ -75,7 +77,6 @@ function Portal() {
           );
           const docSnap = await getDocs(queryQ);
           arr[i] = docSnap.docs.length;
-          console.log("bhak", arr);
         }
         getAvail();
       }
@@ -95,16 +96,17 @@ function Portal() {
 
   const bookAppointment = async () => {
     const dateObj = moment(date);
+    const booking_id =
+      dateObj.format("MMMM").substring(0, 3).toUpperCase() +
+      "_" +
+      dateObj.date() +
+      "_" +
+      (slotsAvailability[slot] + 1);
     console.log("bookappointent", slotsAvailability);
     setLoading(true);
     try {
       await addDoc(collection(db, "Appointments"), {
-        booking_id:
-          dateObj.format("MMMM").substring(0, 3).toUpperCase() +
-          "_" +
-          dateObj.date() +
-          "_" +
-          (slotsAvailability[slot] + 1),
+        booking_id: booking_id,
         date:
           "" +
           dateObj.date() +
@@ -122,6 +124,7 @@ function Portal() {
         "Your appointment has been booked successfully!",
       ]);
       console.log("[BookAppointment] success");
+      navigate(`/confirmation?id=${booking_id}`);
     } catch (err) {
       showSnackbar([
         "error",
@@ -376,7 +379,8 @@ function Portal() {
                         </svg>
                       </span>
                       <span style={{ marginLeft: "05px" }}>
-                        Fafda Road, Jalebi Gali, Dusshera
+                        Mamlatdar & Executive Magistrate Office, Railway Colony,
+                        Bharuch, Gujarat 392001
                       </span>
                     </div>
                     <br />
@@ -390,9 +394,9 @@ function Portal() {
                         <>Book Appointment</>
                       ) : (
                         <>
-                          <span style={{ opacity: 0 }}>PPPP</span>
+                          <span style={{ opacity: 0 }}>----</span>
                           <CircularProgress size="1rem" color="secondary" />
-                          <span style={{ opacity: 0 }}>PPPP</span>
+                          <span style={{ opacity: 0 }}>----</span>
                         </>
                       )}
                     </Button>
